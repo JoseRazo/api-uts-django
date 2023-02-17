@@ -1,9 +1,12 @@
 from .models import Articulo
 from rest_framework import generics, permissions
 from .serializers import ArticuloSerializer
+from rest_framework.pagination import PageNumberPagination
 
 class ArticuloList(generics.ListAPIView):
-    queryset = Articulo.objects.all().order_by('-fecha_evento')
+    paginator = PageNumberPagination()
+    paginator.page_size = 12
+    queryset = Articulo.objects.all().order_by('-fecha_evento', 'id')
     serializer_class = ArticuloSerializer
     permission_classes = [permissions.AllowAny]
 
