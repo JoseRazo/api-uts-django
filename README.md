@@ -12,6 +12,7 @@ API REST UTS
 - Abrir proyecto con editor de codigo y configurar archivo **`.env`**
 - Abrir terminal y entrar a la carpeta del proyecto `~/dev/django/api_uts_django$`
 - Generar imagen docker y contenedores con **`docker-compose build`** y **`docker-compose up -d`**
+- Crear APP `docker compose run api_uts python manage.py startapp nombre_de_la_app`
 - Crear migraciones `docker compose run api_uts python manage.py makemigrations`
 - Ejecutar migraciones `docker compose run api_uts python manage.py migrate`
 - Crear superusuario **`docker compose run api_uts python manage.py createsuperuser`**
