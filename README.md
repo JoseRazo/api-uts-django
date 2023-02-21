@@ -25,4 +25,4 @@ API REST UTS
 
 ## Abrir proyecto
 
-Abrir navegador y entrar a URL [127.0.0.1:8888](http://127.0.0.1:8080)
+Abrir navegador y entrar a URL [127.0.0.1:8001](http://127.0.0.1:8001)
