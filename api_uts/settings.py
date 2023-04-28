@@ -46,11 +46,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'ckeditor',
     'noticias',
-<<<<<<< HEAD
-    'eventos'
-=======
+    'eventos',
     'becas'
->>>>>>> 5c54a61d4faa981b8cbb834fe81900e6bd6faea5
 ]
 
 MIDDLEWARE = [

@@ -7,27 +7,27 @@ class InstructorViewSet(generics.ListAPIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = InstructorSerializer
 
-class CronogramaViewSet(viewsets.ModelViewSet):
+class CronogramaViewSet(generics.ListAPIView):
     queryset = Cronograma.objects.all()
     permission_classes = [permissions.AllowAny]
     serializer_class = CronogramaSerializer
 
-class HotelViewSet(viewsets.ModelViewSet):
+class HotelViewSet(generics.ListAPIView):
     queryset = Hotel.objects.all()
     permission_classes = [permissions.AllowAny]
     serializer_class = HotelSerializer
 
-class PatrocinadoresViewSet(viewsets.ModelViewSet):
+class PatrocinadoresViewSet(generics.ListAPIView):
     queryset = Patrocinadores.objects.all()
     permission_classes = [permissions.AllowAny]
     serializer_class = PatrocinadoresSerializer
 
-class HeaderViewSet(viewsets.ModelViewSet):
+class HeaderViewSet(generics.ListAPIView):
     queryset = Header.objects.all()
     permission_classes = [permissions.AllowAny]
     serializer_class = HeaderSerializer
 
-class EventoViewSet(viewsets.ModelViewSet):
+class EventoViewSet(generics.ListAPIView):
     queryset = Evento.objects.all()
     permission_classes = [permissions.AllowAny]
     serializer_class = EventoSerializer
