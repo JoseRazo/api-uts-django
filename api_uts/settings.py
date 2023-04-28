@@ -46,7 +46,11 @@ INSTALLED_APPS = [
     'corsheaders',
     'ckeditor',
     'noticias',
+<<<<<<< HEAD
     'eventos'
+=======
+    'becas'
+>>>>>>> 5c54a61d4faa981b8cbb834fe81900e6bd6faea5
 ]
 
 MIDDLEWARE = [
@@ -166,3 +170,10 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'height': 'full', 
+        'width': 'full', 
+    },
+}

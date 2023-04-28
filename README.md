@@ -1,3 +1,4 @@
+
 # api-uts-django
 API REST UTS
 
@@ -18,10 +19,37 @@ API REST UTS
 - Crear superusuario **`docker compose run api_uts python manage.py createsuperuser`**
 
 ## Cambios en produccion
-- Editar .env DEBUG = FALSE
-- Editar settings.py y descomentar la linea STATIC_ROOT = BASE_DIR / 'static_prod/'
+- Editar .env
+```sh
+DEBUG = FALSE
+```
+- Editar settings.py
+> **Descomentar las siguientes lineas:**
+```sh
+#STATIC_ROOT = BASE_DIR / 'static_prod/'
+#CORS_ORIGIN_ALLOW_ALL = True
+#CORS_ALLOW_CREDENTIALS = True
+#CORS_ALLOW_HEADERS = ['*']
+```
+> **Comentar las siguientes lineas:**
+```sh
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:4200",
+]
+```
+- Editar api_uts/urls.py
+> **Descomentar las siguientes lineas:**
+```sh
+# from django.urls import re_path
+# from django.views.static import serve
+#re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+```
+> **Comentar las siguientes lineas:**
+```sh
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
+
 - Ejecutar `docker compose run api_uts python manage.py collectstatic`
-- Editar cele/urls.py comentar la linea += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) y descomentar re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 
 ## Abrir proyecto
 
