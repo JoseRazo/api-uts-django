@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'ckeditor',
     'noticias',
+    'eventos',
     'becas'
 ]
 
@@ -91,30 +92,30 @@ WSGI_APPLICATION = 'api_uts.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'mssql',
-        'HOST': os.environ.get('DB_HOST_SQLSRV'),
-        'NAME': os.environ.get('DB_NAME_SQLSRV'),
-        'USER': os.environ.get('DB_USER_SQLSRV'),
-        'PASSWORD': os.environ.get('DB_PASS_SQLSRV'),
-        'PORT': os.environ.get('DB_PORT_SQLSRV'),
-        'OPTIONS': {
-            'driver': 'FreeTDS',
-            'unicode_results': True,
-            'host_is_server': True,
-            'driver_supports_utf8': True,
-            'extra_params': 'tds_version=7.4',
-        }
-    },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'mssql',
+#        'HOST': os.environ.get('DB_HOST_SQLSRV'),
+#       'NAME': os.environ.get('DB_NAME_SQLSRV'),
+#        'USER': os.environ.get('DB_USER_SQLSRV'),
+#        'PASSWORD': os.environ.get('DB_PASS_SQLSRV'),
+#        'PORT': os.environ.get('DB_PORT_SQLSRV'),
+#        'OPTIONS': {
+#            'driver': 'FreeTDS',
+#            'unicode_results': True,
+#            'host_is_server': True,
+#            'driver_supports_utf8': True,
+#            'extra_params': 'tds_version=7.4',
+#        }
+#    },
+#s}
 
 
 # Password validation
