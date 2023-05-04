@@ -1,6 +1,7 @@
 #para ignorar todos los archivos excepto la carpeta
 /media/*
 
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
