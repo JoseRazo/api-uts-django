@@ -38,6 +38,7 @@ class Hotel(models.Model):
     nombre=models.CharField(max_length=254)
     direccion=RichTextField()
     imagen=models.ImageField(upload_to="hoteles", blank=True, null=True)
+    url=models.URLField(max_length=254)
 
     class Meta:
         verbose_name = "Hotel"
@@ -82,5 +83,18 @@ class Evento(models.Model):
 
     def __str__(self):
         return self.nombre
+    
+class Curso(models.Model):
+    instructor=models.ForeignKey(Instructor, on_delete=models.CASCADE)
+    nombre=models.CharField(max_length=254)
+    objetivo=RichTextField()
+
+    class Meta:
+        verbose_name = "Curso"
+        verbose_name_plural = "Cursos"
+
+    def __str__(self) :
+        return self.nombre
+
 
 

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Instructor,Cronograma,Hotel,Patrocinadores,Header,Evento
+from .models import Instructor,Cronograma,Hotel,Patrocinadores,Header,Evento,Curso
 
 class InstructorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,7 +16,7 @@ class CronogramaSerializer(serializers.ModelSerializer):
 class HotelSerializer(serializers.ModelSerializer):
     class Meta:
         model=Hotel
-        fields = ('id','nombre','direccion','imagen')
+        fields = ('id','nombre','direccion','imagen','url',)
         read_only_fields = ('id','nombre','direccion','imagen',)
 
 class PatrocinadoresSerializer(serializers.ModelSerializer):
@@ -36,3 +36,9 @@ class EventoSerializer(serializers.ModelSerializer):
         model = Evento
         fields = ('id','nombre','lugar','descripcion','mapa','logo')
         read_only_fields = ('id','nombre','lugar','descripcion','mapa','logo',)
+
+class CursoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Curso
+        fields = ('id','instructor','nombre','objetivo')
+        read_only_fields = ('id','instructor','nombre','objetivo',)
