@@ -12,8 +12,12 @@ class InstructorAdmin(admin.ModelAdmin):
     search_fields=("nombre","correo","area_estudios")
 
 class CronogramaAdmin(admin.ModelAdmin):
-    list_display=("actividad","dia","hora")
-    search_fields=("actividad","dia","hora")
+    list_display=("actividad","dia","hora_inicio","hora_fin")
+    search_fields=("actividad","dia","hora_inicio","hora_fin")
+
+class Cronograma_Dia2Admin(admin.ModelAdmin):
+    list_display=("actividad","dia","hora","hora2","grupo")
+    search_fields=("actividad","dia","hora","hora2","grupo")
 
 class HotelAdmin(admin.ModelAdmin):
     list_display=("nombre","direccion","url")
@@ -22,7 +26,7 @@ class PatrocinadoresAdmin(admin.ModelAdmin):
     list_display=("nombre","url")
 
 class HeaderAdmin(admin.ModelAdmin):
-    list_display=("seccion","url_seccion")
+    list_display=("seccion","url_seccion","seccion_id")
 
 class EventoAdmin(admin.ModelAdmin):
     list_display=("nombre","lugar","descripcion")

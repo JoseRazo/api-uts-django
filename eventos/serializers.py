@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Instructor,Cronograma,Hotel,Patrocinadores,Header,Evento,Curso
+from .models import Instructor,Cronograma,Hotel,Patrocinadores,Header,Evento,Curso,Cronograma_Dia2
 
 class InstructorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,8 +10,14 @@ class InstructorSerializer(serializers.ModelSerializer):
 class CronogramaSerializer(serializers.ModelSerializer):
     class Meta:
         model=Cronograma
-        fields = ('id','dia','hora','actividad','descripcion','fotografia')
-        read_only_fields = ('id','dia','hora','actividad','descripcion','fotografia',)
+        fields = ('id','actividad','dia','hora_inicio','hora_fin','fotografia')
+        read_only_fields = ('id','actividad','dia','hora_inicio','hora_fin','fotografia')
+
+class Cronograma_Dia2Serializer(serializers.ModelSerializer):
+    class Meta:
+        model=Cronograma_Dia2
+        fields = ('id','dia','hora','hora2','actividad','fotografia')
+        read_only_fields = ('id','dia','hora','hora2','actividad','fotografia',)
 
 class HotelSerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,14 +34,14 @@ class PatrocinadoresSerializer(serializers.ModelSerializer):
 class HeaderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Header
-        fields = ('id','seccion','url_seccion')
-        read_only_fields = ('id','seccion','url_seccion',)
+        fields = ('id','seccion','url_seccion','seccion_id')
+        read_only_fields = ('id','seccion','url_seccion','seccion_id')
  
 class EventoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Evento
-        fields = ('id','nombre','lugar','descripcion','mapa','logo')
-        read_only_fields = ('id','nombre','lugar','descripcion','mapa','logo',)
+        fields = ('id','nombre','lugar','descripcion','mapa','logo','activo')
+        read_only_fields = ('id','nombre','lugar','descripcion','mapa','logo','activo')
 
 class CursoSerializer(serializers.ModelSerializer):
     class Meta:
