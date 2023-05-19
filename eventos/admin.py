@@ -1,5 +1,5 @@
 from django.contrib import admin
-from eventos.models import Instructor,Cronograma,Hotel,Patrocinadores,Header,Evento,Curso
+from eventos.models import Instructor,Cronograma,Hotel,Patrocinadores,Header,Evento,Curso,Empresa
 
 # Register your models here.
 class CursoInLine(admin.StackedInline):
@@ -12,12 +12,8 @@ class InstructorAdmin(admin.ModelAdmin):
     search_fields=("nombre","correo","area_estudios")
 
 class CronogramaAdmin(admin.ModelAdmin):
-    list_display=("actividad","dia","hora_inicio","hora_fin")
-    search_fields=("actividad","dia","hora_inicio","hora_fin")
-
-class Cronograma_Dia2Admin(admin.ModelAdmin):
-    list_display=("actividad","dia","hora","hora2","grupo")
-    search_fields=("actividad","dia","hora","hora2","grupo")
+    list_display=("id", "tipo_actividad", "curso", "dia","fecha","hora_inicio","hora_fin")
+    search_fields=("id", "tipo_actividad", "curso", "dia","fecha","hora_inicio","hora_fin")
 
 class HotelAdmin(admin.ModelAdmin):
     list_display=("nombre","direccion","url")
@@ -36,6 +32,10 @@ class CursoAdmin(admin.ModelAdmin):
     list_display=("nombre","instructor","objetivo")
     search_fields=("nombre","instructor","objetivo")
 
+class EmpresaAdmin(admin.ModelAdmin):
+    list_display=("nombre",)
+    search_fields=("nombre",)
+
 admin.site.register(Instructor, InstructorAdmin)
 admin.site.register(Cronograma, CronogramaAdmin)
 admin.site.register(Hotel, HotelAdmin)
@@ -43,3 +43,4 @@ admin.site.register(Patrocinadores, PatrocinadoresAdmin)
 admin.site.register(Header, HeaderAdmin)
 admin.site.register(Evento, EventoAdmin)
 admin.site.register(Curso, CursoAdmin)
+admin.site.register(Empresa, EmpresaAdmin)

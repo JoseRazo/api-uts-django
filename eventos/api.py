@@ -1,6 +1,6 @@
-from .models import Instructor,Cronograma,Hotel,Patrocinadores,Header,Evento,Curso,Cronograma_Dia2
+from .models import Instructor,Cronograma,Hotel,Patrocinadores,Header,Evento,Curso
 from rest_framework import viewsets, permissions, generics
-from .serializers import InstructorSerializer,CronogramaSerializer,HotelSerializer,PatrocinadoresSerializer,HeaderSerializer,EventoSerializer,CursoSerializer,Cronograma_Dia2Serializer
+from .serializers import InstructorSerializer,CronogramaSerializer,HotelSerializer,PatrocinadoresSerializer,HeaderSerializer,EventoSerializer,CursoSerializer
 
 class InstructorViewSet(generics.ListAPIView):
     queryset = Instructor.objects.all()
@@ -11,11 +11,6 @@ class CronogramaViewSet(generics.ListAPIView):
     queryset = Cronograma.objects.all()
     permission_classes = [permissions.AllowAny]
     serializer_class = CronogramaSerializer
-
-class Cronograma_Dia2ViewSet(generics.ListAPIView):
-    queryset = Cronograma_Dia2.objects.all()
-    permission_classes = [permissions.AllowAny]
-    serializer_class = Cronograma_Dia2Serializer
 
 class HotelViewSet(generics.ListAPIView):
     queryset = Hotel.objects.all()

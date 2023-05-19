@@ -20,33 +20,45 @@ class Instructor(models.Model):
     def __str__(self):
         return self.nombre
 
+class Empresa(models.Model):
+    nombre = models.CharField(max_length=254, unique=True)
+
+    class Meta:
+        verbose_name = "Empresa"
+        verbose_name_plural = "Empresas"
+    
+    def __str__(self):
+        return self.nombre
+
+    
 class Cronograma(models.Model):
-    actividad= models.CharField(max_length=254)
-    dia= models.DateField()
+    ACTIVIDADES_CHOISES = (
+        ('talleres', 'Talleres'),
+        ('visitas_industriales', 'Visitas Industriales'),
+        ('otro', 'Otro'),
+    )
+    tipo_actividad = models.CharField(max_length=20, choices=ACTIVIDADES_CHOISES)
+    curso = models.ForeignKey('Curso', on_delete=models.CASCADE, null=True, blank=True)
+    empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE, null=True, blank=True)
+    otra_actividad= models.CharField(max_length=254, null=True, blank=True)
+    dia = models.IntegerField(choices=[(i, i) for i in range(1, 11)])
+    fecha= models.DateField()
     hora_inicio= models.TimeField('Hora inicio')
     hora_fin= models.TimeField('Hora fin')
-    fotografia=models.ImageField(upload_to="cronogramas" ,verbose_name='Imagen relacionada', blank=True, null=True)
 
     class Meta:
         verbose_name = "Cronograma"
         verbose_name_plural = "Cronogramas"
 
     def __str__(self):
-        return self.actividad
-    
-class Cronograma_Dia2(models.Model):
-    dia= models.DateField()
-    hora= models.TimeField()
-    hora2= models.TimeField()
-    actividad= models.CharField(max_length=254)
-    fotografia=models.ImageField(upload_to="cronogramas" ,verbose_name='Imagen relacionada', blank=True, null=True)
-
-    class Meta:
-        verbose_name = "Cronograma dia 2"
-        verbose_name_plural = "Cronogramas dia 2"
-
-    def __str__(self):
-        return self.actividad
+        if self.curso:
+            return f"Curso: {self.curso}"
+        elif self.empresa:
+            return f"Empresa: {self.empresa}"
+        elif self.otra_actividad:
+            return f"Otra Actividad: {self.otra_actividad}"
+        else:
+            return f"ID: {self.id}"
 
 class Hotel(models.Model):
     nombre=models.CharField(max_length=254)
