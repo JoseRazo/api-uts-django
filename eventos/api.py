@@ -1,6 +1,6 @@
-from .models import Instructor,Cronograma,Hotel,Patrocinadores,Header,Evento
+from .models import Instructor,Cronograma,Hotel,Patrocinadores,Header,Evento,Curso
 from rest_framework import viewsets, permissions, generics
-from .serializers import InstructorSerializer,CronogramaSerializer,HotelSerializer,PatrocinadoresSerializer,HeaderSerializer,EventoSerializer
+from .serializers import InstructorSerializer,CronogramaSerializer,HotelSerializer,PatrocinadoresSerializer,HeaderSerializer,EventoSerializer,CursoSerializer
 
 class InstructorViewSet(generics.ListAPIView):
     queryset = Instructor.objects.all()
@@ -28,6 +28,11 @@ class HeaderViewSet(generics.ListAPIView):
     serializer_class = HeaderSerializer
 
 class EventoViewSet(generics.ListAPIView):
-    queryset = Evento.objects.all()
+    queryset = Evento.objects.filter(activo=True)
     permission_classes = [permissions.AllowAny]
     serializer_class = EventoSerializer
+
+class CursoViewSet(generics.ListAPIView):
+    queryset = Curso.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = CursoSerializer
