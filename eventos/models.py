@@ -49,6 +49,7 @@ class Cronograma(models.Model):
     class Meta:
         verbose_name = "Cronograma"
         verbose_name_plural = "Cronogramas"
+        ordering = ['hora_inicio']
 
     def __str__(self):
         if self.curso:
