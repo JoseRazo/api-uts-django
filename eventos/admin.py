@@ -1,5 +1,5 @@
 from django.contrib import admin
-from eventos.models import Instructor,Cronograma,Hotel,Patrocinadores,Header,Evento,Curso,Empresa
+from eventos.models import Instructor,Cronograma,Hotel,Patrocinadores,Header,Evento,Curso,Empresa,Contacto
 
 # Register your models here.
 class CursoInLine(admin.StackedInline):
@@ -25,8 +25,8 @@ class HeaderAdmin(admin.ModelAdmin):
     list_display=("seccion","url_seccion","seccion_id")
 
 class EventoAdmin(admin.ModelAdmin):
-    list_display=("nombre","lugar","descripcion")
-    search_fields=("nombre","lugar","descripcion")
+    list_display=("nombre","lugar","activo")
+    search_fields=("nombre","lugar","activo")
 
 class CursoAdmin(admin.ModelAdmin):
     list_display=("nombre","instructor","objetivo")
@@ -36,6 +36,10 @@ class EmpresaAdmin(admin.ModelAdmin):
     list_display=("nombre",)
     search_fields=("nombre",)
 
+# class ContactoAdmin(admin.ModelAdmin):
+#     list_display=("nombre","email","telefono")
+#     search_fields=("nombre","email","telefono")
+
 admin.site.register(Instructor, InstructorAdmin)
 admin.site.register(Cronograma, CronogramaAdmin)
 admin.site.register(Hotel, HotelAdmin)
@@ -44,3 +48,4 @@ admin.site.register(Header, HeaderAdmin)
 admin.site.register(Evento, EventoAdmin)
 admin.site.register(Curso, CursoAdmin)
 admin.site.register(Empresa, EmpresaAdmin)
+# admin.site.register(Contacto, ContactoAdmin)

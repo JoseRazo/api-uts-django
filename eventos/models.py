@@ -5,13 +5,13 @@ from ckeditor.fields import RichTextField
 class Instructor(models.Model):
     nombre = models.CharField(max_length=254, unique=True)
     telefono=models.CharField(max_length=15, null=True, blank=True)
-    correo=models.EmailField()
-    area_estudios=models.CharField(max_length=254, verbose_name='Area de estudios')
-    descripcion= RichTextField(verbose_name='Descripción')
+    correo=models.EmailField(null=True, blank=True)
+    area_estudios=models.CharField(max_length=254, verbose_name='Area de estudios', null=True, blank=True)
+    descripcion= RichTextField(verbose_name='Descripción', null=True, blank=True)
     curriculum=models.FileField(blank=True, null=True)
     fecha_creacion= models.DateField(verbose_name='Fecha de creación', auto_now=True)
     fecha_actualizacion=models.DateField(verbose_name='Fecha de actualización', auto_now_add=True)
-    fotografia= models.ImageField(upload_to="instructores", blank=True, null=True, default="instructores/perfil-default.jpg")
+    fotografia= models.ImageField(upload_to="instructores", blank=True, null=True, default="instructores/perfil-default.png")
 
     class Meta:
         verbose_name = "Instructor"
@@ -123,6 +123,17 @@ class Curso(models.Model):
 
     def __str__(self) :
         return self.nombre
+    
+class Contacto(models.Model):
+    nombre = models.CharField(max_length=100)
+    email = models.EmailField()
+    telefono = models.CharField(max_length=20, blank=True)
+    asunto = models.CharField(max_length=200)
+    mensaje = models.TextField()
+
+    def __str__(self):
+        return self.nombre
+
 
 
 
