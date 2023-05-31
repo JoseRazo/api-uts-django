@@ -25,8 +25,8 @@ class HeaderAdmin(admin.ModelAdmin):
     list_display=("seccion","url_seccion","seccion_id")
 
 class EventoAdmin(admin.ModelAdmin):
-    list_display=("nombre","lugar","descripcion")
-    search_fields=("nombre","lugar","descripcion")
+    list_display=("nombre","lugar","activo")
+    search_fields=("nombre","lugar","activo")
 
 class CursoAdmin(admin.ModelAdmin):
     list_display=("nombre","instructor","objetivo")
@@ -49,3 +49,4 @@ admin.site.register(Evento, EventoAdmin)
 admin.site.register(Curso, CursoAdmin)
 admin.site.register(Empresa, EmpresaAdmin)
 admin.site.register(Registro, RegistroAdmin)
+# admin.site.register(Contacto, ContactoAdmin)
