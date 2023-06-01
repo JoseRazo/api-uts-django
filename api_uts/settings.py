@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'noticias',
     'eventos',
-    'becas'
+    'becas',
 ]
 
 MIDDLEWARE = [
