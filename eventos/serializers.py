@@ -1,7 +1,7 @@
 from django.conf import settings
 from rest_framework import serializers
 from rest_framework.generics import ListAPIView
-from .models import Instructor,Cronograma,Hotel,Patrocinadores,Header,Evento,Curso, Empresa
+from .models import Instructor,Cronograma,Hotel,Patrocinadores,Header,Evento,Curso, Empresa, Registro
 
 def update_image_url(image_url):
     # Verifica si la URL de la imagen comienza con "http://" y reemplázala por "https://"
@@ -111,3 +111,11 @@ class ContactoSerializer(serializers.Serializer):
     telefono = serializers.CharField(max_length=20, required=False)
     asunto = serializers.CharField(max_length=200)
     mensaje = serializers.CharField()
+
+class RegistroSerializer(serializers.ModelSerializer):
+    # taller = CursoSerializer()
+    class Meta:
+        model = Registro
+        # fields = ('id','nombre','apellido_paterno','apellido_materno', 'escuela_procedencia', 'foto', 'taller', 'inscrito', 'referencia', 'comprobante_pago')
+        fields = ('id','nombre','apellido_paterno','apellido_materno', 'escuela_procedencia', 'foto', 'inscrito', 'referencia', 'comprobante_pago') 
+        read_only_fields = ('id', 'taller',)
