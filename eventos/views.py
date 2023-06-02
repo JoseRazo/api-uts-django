@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 from django.conf import settings
 from .serializers import ContactoSerializer, RegistroSerializer
 
@@ -16,7 +16,6 @@ class EnviarFormularioAPI(APIView):
 
             # Construir el mensaje de correo
             mensaje_correo = f"Nombre: {nombre}\nEmail: {email}\nTeléfono: {telefono}\nAsunto: {asunto}\nMensaje: {mensaje}"
-
             try:
                 # Enviar el correo
                 send_mail(
@@ -46,23 +45,27 @@ class RegistroAPI(APIView):
             apellido_materno = serializer.validated_data['apellido_materno']
             escuela_procedencia = serializer.validated_data['escuela_procedencia']
             foto = serializer.validated_data['foto']
-            taller = serializer.validated_data['taller']
+            # taller = serializer.validated_data['taller']
             inscrito = serializer.validated_data['inscrito']
             referencia = serializer.validated_data['referencia']
             comprobante_pago = serializer.validated_data['comprobante_pago']
 
             # Construir el mensaje de correo
-            mensaje_correo = f"Nombre: {nombre}\nApellido Paterno: {apellido_paterno}\nApellido Materno: {apellido_materno}\nEscuela Procedencia: {escuela_procedencia}"
+            mensaje_correo = f"Nombre: {nombre}\nApellido Paterno: {apellido_paterno}\nApellido Materno: {apellido_materno}\nEscuela Procedencia: {escuela_procedencia}\nEstatus: {inscrito}\nReferencia: {referencia}"
 
             try:
+                mail = EmailMessage('Formulario de Registro', mensaje_correo, settings.DEFAULT_FROM_EMAIL, ['elhongo1409@outlook.com'])
+                # mail.attach("design.png", foto, "image/png")
+                mail.send(fail_silently=False)
                 # Enviar el correo
-                send_mail(
-                    'Formulario de registro',
-                    mensaje_correo,
-                    settings.DEFAULT_FROM_EMAIL,
-                    ['elhongo1409@outlook.com'],
-                    fail_silently=False
-                )
+                # send_mail(
+                #     'Formulario de registro',
+                #     mensaje_correo,
+                #     settings.DEFAULT_FROM_EMAIL,
+                #     ['elhongo1409@outlook.com'],
+                #     fail_silently=False
+                # )
+                serializer.save()
 
                 # Puedes agregar una lógica adicional aquí, como retornar un código de estado HTTP o un mensaje de éxito
                 return Response({'mensaje': 'Formulario enviado con éxito'}, status=200)
@@ -72,3 +75,4 @@ class RegistroAPI(APIView):
         else:
             # En caso de que el formulario sea inválido, puedes retornar los errores
             return Response(serializer.errors, status=400)
+        

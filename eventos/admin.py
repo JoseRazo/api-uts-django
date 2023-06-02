@@ -37,7 +37,7 @@ class EmpresaAdmin(admin.ModelAdmin):
     search_fields=("nombre",)
 
 class RegistroAdmin(admin.ModelAdmin):
-    list_display=("nombre",)
+    list_display=("nombre", "apellido_paterno", "apellido_materno", "escuela_procedencia", "foto", "inscrito", "referencia", "comprobante_pago")
     search_fields=("nombre",)
 
 admin.site.register(Instructor, InstructorAdmin)

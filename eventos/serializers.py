@@ -112,14 +112,10 @@ class ContactoSerializer(serializers.Serializer):
     asunto = serializers.CharField(max_length=200)
     mensaje = serializers.CharField()
 
-class RegistroSerializer(serializers.Serializer):
-    nombre = serializers.TextField(max_length=145)
-    apellido_paterno = serializers.TextField(max_length=145)
-    apellido_materno = serializers.TextField(max_length=145)
-    escuela_procedencia = serializers.TextField(max_length=145)
-    foto = serializers.ImageField(
-        default='default-640x480.png', upload_to='registro', help_text="El tamaño de la imagen debe ser de 640 x 480 pixeles")
-    taller = serializers.ForeignKey(Curso, on_delete=serializers.CASCADE)
-    inscrito = serializers.BooleanField(default=False)
-    referencia = serializers.TextField(max_length=140)
-    comprobante_pago = serializers.FileField(upload_to='registro/comprobante')
+class RegistroSerializer(serializers.ModelSerializer):
+    # taller = CursoSerializer()
+    class Meta:
+        model = Registro
+        # fields = ('id','nombre','apellido_paterno','apellido_materno', 'escuela_procedencia', 'foto', 'taller', 'inscrito', 'referencia', 'comprobante_pago')
+        fields = ('id','nombre','apellido_paterno','apellido_materno', 'escuela_procedencia', 'foto', 'inscrito', 'referencia', 'comprobante_pago') 
+        read_only_fields = ('id', 'taller',)
