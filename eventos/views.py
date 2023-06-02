@@ -1,9 +1,11 @@
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.core.mail import send_mail, EmailMessage
 from django.conf import settings
 from .models import Registro
 from .serializers import ContactoSerializer, RegistroSerializer
+from django.template.loader import render_to_string
 
 class EnviarFormularioAPI(APIView):
     def post(self, request):
@@ -15,25 +17,34 @@ class EnviarFormularioAPI(APIView):
             asunto = serializer.validated_data['asunto']
             mensaje = serializer.validated_data['mensaje']
 
-            # Construir el mensaje de correo
-            mensaje_correo = f"Nombre: {nombre}\nEmail: {email}\nTeléfono: {telefono}\nAsunto: {asunto}\nMensaje: {mensaje}"
+            # Render the HTML template with the form data
+            context = {
+                'nombre': nombre,
+                'email': email,
+                'telefono': telefono,
+                'asunto': asunto,
+                'mensaje': mensaje,
+            }
+            html_content = render_to_string('eventos/form_contacto.html', context)
+
             try:
-                # Enviar el correo
-                send_mail(
+                # Create an EmailMessage instance with the subject, HTML content, sender, and recipient
+                email_message = EmailMessage(
                     'Formulario de contacto',
-                    mensaje_correo,
+                    html_content,
                     settings.DEFAULT_FROM_EMAIL,
                     ['jrazo@utsalamanca.edu.mx'],
-                    fail_silently=False
                 )
+                # Set the content subtype to 'html' for sending HTML email
+                email_message.content_subtype = 'html'
+                # Send the email
+                email_message.send()
 
-                # Puedes agregar una lógica adicional aquí, como retornar un código de estado HTTP o un mensaje de éxito
+                # Additional logic can be added here, such as returning an HTTP status code or success message
                 return Response({'mensaje': 'Formulario enviado con éxito'}, status=200)
             except Exception as e:
-                # En caso de que ocurra una excepción al enviar el correo, puedes capturarla y retornar un mensaje de error
                 return Response({'mensaje': 'Error al enviar el formulario', 'error': str(e)}, status=500)
         else:
-            # En caso de que el formulario sea inválido, puedes retornar los errores
             return Response(serializer.errors, status=400)
 
 
