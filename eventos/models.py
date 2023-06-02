@@ -146,7 +146,7 @@ class Registro(models.Model):
         default='default-640x480.png', upload_to='registro', help_text="El tamaño de la imagen debe ser de 640 x 480 pixeles", null=True, blank=True)
     taller = models.ForeignKey(Curso, on_delete=models.CASCADE, null=True, blank=True)
     inscrito = models.BooleanField(default=False)
-    referencia = models.TextField(max_length=140)
+    referencia = models.TextField(max_length=140, unique=True)
     comprobante_pago = models.FileField(upload_to='registro/comprobante', null=True, blank=True)
 
     class Meta:

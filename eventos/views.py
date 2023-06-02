@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.core.mail import send_mail, EmailMessage
 from django.conf import settings
+from .models import Registro
 from .serializers import ContactoSerializer, RegistroSerializer
 
 class EnviarFormularioAPI(APIView):
@@ -53,18 +54,15 @@ class RegistroAPI(APIView):
             # Construir el mensaje de correo
             mensaje_correo = f"Nombre: {nombre}\nApellido Paterno: {apellido_paterno}\nApellido Materno: {apellido_materno}\nEscuela Procedencia: {escuela_procedencia}\nEstatus: {inscrito}\nReferencia: {referencia}"
 
+            # ref_exists = str(Registro.objects.filter(referencia=str(referencia)))
+            # if 'Registro' in ref_exists:
+            #     print("XDXDXD")
+
             try:
                 mail = EmailMessage('Formulario de Registro', mensaje_correo, settings.DEFAULT_FROM_EMAIL, ['elhongo1409@outlook.com'])
-                # mail.attach("design.png", foto, "image/png")
+                mail.attach(str(foto), foto.read(), foto.content_type)
+                mail.attach(str(comprobante_pago), comprobante_pago.read(), comprobante_pago.content_type)
                 mail.send(fail_silently=False)
-                # Enviar el correo
-                # send_mail(
-                #     'Formulario de registro',
-                #     mensaje_correo,
-                #     settings.DEFAULT_FROM_EMAIL,
-                #     ['elhongo1409@outlook.com'],
-                #     fail_silently=False
-                # )
                 serializer.save()
 
                 # Puedes agregar una lógica adicional aquí, como retornar un código de estado HTTP o un mensaje de éxito
