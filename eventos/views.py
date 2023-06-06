@@ -33,7 +33,7 @@ class EnviarFormularioAPI(APIView):
                     'Formulario de contacto',
                     html_content,
                     settings.DEFAULT_FROM_EMAIL,
-                    ['jrazo@utsalamanca.edu.mx'],
+                    ['611910523@utsalamanca.edu.mx'],
                 )
                 # Set the content subtype to 'html' for sending HTML email
                 email_message.content_subtype = 'html'
