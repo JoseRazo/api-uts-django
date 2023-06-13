@@ -29,10 +29,10 @@ class EnviarFormularioAPI(APIView):
             try:
                 # Create an EmailMessage instance with the subject, HTML content, sender, and recipient
                 email_message = EmailMessage(
-                    'Formulario de contacto',
+                    'Formulario de Contacto COINPI',
                     html_content,
                     settings.DEFAULT_FROM_EMAIL,
-                    ['611910523@utsalamanca.edu.mx'],
+                    ['coinpi.registro2023@utsalamanca.edu.mx'],
                 )
                 # Set the content subtype to 'html' for sending HTML email
                 email_message.content_subtype = 'html'
@@ -45,7 +45,6 @@ class EnviarFormularioAPI(APIView):
                 return Response({'mensaje': 'Error al enviar el formulario', 'error': str(e)}, status=500)
         else:
             return Response(serializer.errors, status=400)
-
 
 class RegistroAPI(APIView):
     def post(self, request):
