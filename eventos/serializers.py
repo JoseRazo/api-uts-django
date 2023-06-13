@@ -117,5 +117,5 @@ class RegistroSerializer(serializers.ModelSerializer):
     class Meta:
         model = Registro
         # fields = ('id','nombre','apellido_paterno','apellido_materno', 'escuela_procedencia', 'foto', 'taller', 'inscrito', 'referencia', 'comprobante_pago')
-        fields = ('id','nombre','apellido_paterno','apellido_materno', 'escuela_procedencia', 'foto', 'inscrito', 'referencia', 'comprobante_pago') 
-        read_only_fields = ('id', 'taller',)
+        fields = ('id','nombre','apellido_paterno','apellido_materno', 'escuela_procedencia', 'foto', 'referencia', 'comprobante_pago') 
+        read_only_fields = ('id',)
