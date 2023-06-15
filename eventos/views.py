@@ -55,18 +55,27 @@ class RegistroAPI(APIView):
             apellido_materno = serializer.validated_data['apellido_materno']
             escuela_procedencia = serializer.validated_data['escuela_procedencia']
             foto = serializer.validated_data['foto']
-            # taller = serializer.validated_data['taller']
-            # inscrito = serializer.validated_data['inscrito']
+            taller = serializer.validated_data['taller']
             referencia = serializer.validated_data['referencia']
             comprobante_pago = serializer.validated_data['comprobante_pago']
 
+            context = {
+                'nombre': nombre,
+                'apellido_paterno': apellido_paterno,
+                'apellido_materno': apellido_materno,
+                'escuela_procedencia': escuela_procedencia,
+                'taller': taller,
+                'referencia': referencia
+            }
+            html_content = render_to_string('eventos/form_registro.html', context)
+
             # Construir el mensaje de correo
-            mensaje_correo = f"Nombre: {nombre}\nApellido Paterno: {apellido_paterno}\nApellido Materno: {apellido_materno}\nEscuela Procedencia: {escuela_procedencia}\nReferencia: {referencia}"
 
             try:
-                mail = EmailMessage('Formulario de Registro', mensaje_correo, settings.DEFAULT_FROM_EMAIL, ['elhongo1409@outlook.com'])
+                mail = EmailMessage('Formulario de Registro COINPI', html_content, settings.DEFAULT_FROM_EMAIL, ['elhongo1409@outlook.com'])
                 mail.attach(str(foto), foto.read(), foto.content_type)
                 mail.attach(str(comprobante_pago), comprobante_pago.read(), comprobante_pago.content_type)
+                mail.content_subtype = 'html'
                 mail.send(fail_silently=False)
                 serializer.save()
 

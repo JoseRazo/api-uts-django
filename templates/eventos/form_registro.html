@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Registro</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: RGBA(248, 249, 250, var(--bs-bg-opacity, 1)) !important;
+        }
+
+        .card {
+            max-width: 100%;
+            margin: 10px;
+            border: 1px solid #76100f;
+        }
+
+        .card-header {
+            background-color: #002052;
+            color: #fff;
+            padding: 30px;
+        }
+
+        .card-header h1 {
+            text-align: center;
+            font-weight: 800;
+        }
+
+        .card-body {
+            margin: 25px 0 25px 25px;
+        }
+
+        .card-body p {
+            font-size: 18px;
+        }
+
+        .card-footer {
+            background-color: #009f7b;
+            text-align: center;
+        }
+
+        .img-fluid {
+            width: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h3>Registro</h3>
+            <h3>Congreso Internacional de Procesos Industriales</h3>
+        </div>
+        <div class="card-body">
+            <h3 style="margin-bottom: 15px;">Este mensaje fue enviado desde el formulario de registro del sitio web del Congreso Internacional de Procesos Industriales.</h3>
+            <p><span style="font-weight: 900;">Nombre: </span>{{ nombre }} {{ apellido_paterno }} {{ apellido_materno }}</p>
+            <p><span style="font-weight: 900;">Escuela de Procedencia: </span> {{ escuela_procedencia }}</p>
+            <p><span style="font-weight: 900;">Taller: </span> {{ taller }}</p>
+            <p><span style="font-weight: 900;">Referencia: </span> {{ referencia }}</p>
+        </div>
+        <div class="card-footer">
+            <a href="https://coinpi.utsalamanca.edu.mx/" target="_blank">
+                <img src="https://coinpi.utsalamanca.edu.mx/assets/img/COINPI-2023-Logo-final-blanco.png"
+                    alt="LOGO COINPI" class="img-fluid">
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>
