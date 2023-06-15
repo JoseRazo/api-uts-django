@@ -138,16 +138,16 @@ class Contacto(models.Model):
 
 
 class Registro(models.Model):
-    nombre = models.TextField(max_length=145)
-    apellido_paterno = models.TextField(max_length=145)
-    apellido_materno = models.TextField(max_length=145)
-    escuela_procedencia = models.TextField(max_length=145)
+    nombre = models.CharField(max_length=145)
+    apellido_paterno = models.CharField(max_length=145)
+    apellido_materno = models.CharField(max_length=145)
+    escuela_procedencia = models.CharField(max_length=145)
     foto = models.ImageField(
-        default='default-640x480.png', upload_to='registro', help_text="El tamaño de la imagen debe ser de 640 x 480 pixeles", null=True, blank=True)
+        default='default-640x480.png', upload_to='registro', help_text="El tamaño de la imagen debe ser de 640 x 480 pixeles")
     taller = models.ForeignKey(Curso, on_delete=models.CASCADE, null=True, blank=True)
     inscrito = models.BooleanField(default=False)
-    referencia = models.TextField(max_length=140, unique=True)
-    comprobante_pago = models.FileField(upload_to='registro/comprobante', null=True, blank=True)
+    referencia = models.CharField(max_length=140, unique=True)
+    comprobante_pago = models.FileField(default='default-640x480.png', upload_to='registro/comprobante')
 
     class Meta:
         verbose_name = "Registro"

@@ -1,4 +1,3 @@
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.core.mail import send_mail, EmailMessage
@@ -56,22 +55,27 @@ class RegistroAPI(APIView):
             apellido_materno = serializer.validated_data['apellido_materno']
             escuela_procedencia = serializer.validated_data['escuela_procedencia']
             foto = serializer.validated_data['foto']
-            # taller = serializer.validated_data['taller']
-            inscrito = serializer.validated_data['inscrito']
+            taller = serializer.validated_data['taller']
             referencia = serializer.validated_data['referencia']
             comprobante_pago = serializer.validated_data['comprobante_pago']
 
-            # Construir el mensaje de correo
-            mensaje_correo = f"Nombre: {nombre}\nApellido Paterno: {apellido_paterno}\nApellido Materno: {apellido_materno}\nEscuela Procedencia: {escuela_procedencia}\nEstatus: {inscrito}\nReferencia: {referencia}"
+            context = {
+                'nombre': nombre,
+                'apellido_paterno': apellido_paterno,
+                'apellido_materno': apellido_materno,
+                'escuela_procedencia': escuela_procedencia,
+                'taller': taller,
+                'referencia': referencia
+            }
+            html_content = render_to_string('eventos/form_registro.html', context)
 
-            # ref_exists = str(Registro.objects.filter(referencia=str(referencia)))
-            # if 'Registro' in ref_exists:
-            #     print("XDXDXD")
+            # Construir el mensaje de correo
 
             try:
-                mail = EmailMessage('Formulario de Registro', mensaje_correo, settings.DEFAULT_FROM_EMAIL, ['elhongo1409@outlook.com'])
+                mail = EmailMessage('Formulario de Registro COINPI', html_content, settings.DEFAULT_FROM_EMAIL, ['elhongo1409@outlook.com'])
                 mail.attach(str(foto), foto.read(), foto.content_type)
                 mail.attach(str(comprobante_pago), comprobante_pago.read(), comprobante_pago.content_type)
+                mail.content_subtype = 'html'
                 mail.send(fail_silently=False)
                 serializer.save()
 
@@ -82,5 +86,10 @@ class RegistroAPI(APIView):
                 return Response({'mensaje': 'Error al enviar el formulario', 'error': str(e)}, status=500)
         else:
             # En caso de que el formulario sea inválido, puedes retornar los errores
-            return Response(serializer.errors, status=400)
+            referencia = serializer.data['referencia']
+            ref = Registro.objects.filter(referencia=referencia)
+            if 'Registro' in str(ref):
+                return Response({'mensaje': 'El número de referencia que intentas introducir ya existe.\nIntenta introducir uno diferente.'}, status=500)
+            else:
+                return Response(serializer.errors, status=400)
         
