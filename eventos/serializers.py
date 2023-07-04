@@ -1,7 +1,7 @@
 from django.conf import settings
 from rest_framework import serializers
 from rest_framework.generics import ListAPIView
-from .models import Instructor,Cronograma,Hotel,Patrocinadores,Header,Evento,Curso, Empresa, Registro
+from .models import Instructor, Cronograma, Hotel, Patrocinadores, Header, Evento, Curso, Empresa, Registro
 
 def update_image_url(image_url):
     # Verifica si la URL de la imagen comienza con "http://" y reemplázala por "https://"
@@ -52,8 +52,8 @@ class CursoSerializer(serializers.ModelSerializer):
 class EmpresaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Empresa
-        fields = ('nombre',)
-        read_only_fields = ('nombre',)
+        fields = ('id', 'nombre', 'visita_industrial', 'activo')
+        read_only_fields = ('id', 'nombre', 'visita_industrial', 'activo')
 
 class CronogramaSerializer(serializers.ModelSerializer):
     curso = CursoSerializer()
@@ -116,7 +116,24 @@ class RegistroSerializer(serializers.ModelSerializer):
     # taller = CursoSerializer()
     class Meta:
         model = Registro
-        fields = ('id','nombre','apellido_paterno','apellido_materno', 'escuela_procedencia', 'foto', 'taller', 'referencia', 'comprobante_pago')
+        fields = (
+            'id',
+            'nombre',
+            'apellido_paterno',
+            'apellido_materno', 
+            'email', 
+            'tipo_participante', 
+            'universidad_empresa', 
+            'matricula', 
+            'numero_empleado', 
+            'taller',
+            'dia_taller',
+            'visita_industrial',
+            'dia_visita', 
+            'referencia', 
+            'comprobante_pago',
+            'formato_inscripcion',
+            )
         read_only_fields = ('id',)
 
     def to_representation(self, instance):

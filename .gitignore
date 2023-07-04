@@ -1,11 +1,9 @@
 #para ignorar todos los archivos excepto la carpeta
 /media/
-!media/perfil.jpg
 /media/articulos/
 /media/eventos/
 /media/instructores/
-!media/instructores/perfil-default.png
-
+/media/registro/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

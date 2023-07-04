@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from ckeditor.fields import RichTextField
 
 # Create your models here.
@@ -11,7 +12,7 @@ class Instructor(models.Model):
     curriculum=models.FileField(blank=True, null=True)
     fecha_creacion= models.DateField(verbose_name='Fecha de creación', auto_now=True)
     fecha_actualizacion=models.DateField(verbose_name='Fecha de actualización', auto_now_add=True)
-    fotografia= models.ImageField(upload_to="instructores", blank=True, null=True, default="instructores/perfil-default.png")
+    fotografia= models.ImageField(upload_to="instructores", blank=True, null=True, default="perfil-default.png")
 
     class Meta:
         verbose_name = "Instructor"
@@ -22,6 +23,8 @@ class Instructor(models.Model):
 
 class Empresa(models.Model):
     nombre = models.CharField(max_length=254, unique=True)
+    visita_industrial = models.BooleanField(default=False)
+    activo = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Empresa"
@@ -77,7 +80,7 @@ class Hotel(models.Model):
 class Patrocinadores(models.Model):
     nombre=models.CharField(max_length=254)
     logo=models.ImageField(upload_to="patrocinadores" ,verbose_name="Logo Patrocinador", blank=True, null=True)
-    url=models.URLField(max_length=254)
+    url=models.URLField(max_length=254, null=True, blank=True)
 
     class Meta:
         verbose_name = "Patrocinador"
@@ -138,21 +141,50 @@ class Contacto(models.Model):
 
 
 class Registro(models.Model):
+    PARTICIPANTE_CHOICES = (
+        ('estudiante_utyp', 'Estudiante UTYP'),
+        ('docente_directivo_utyp', 'Docente - Directivo UTYP'),
+        ('publico_general', 'Público General'),
+        ('estudiantes_externos', 'Estudiantes Externos'),
+    )
+
+    DIA_CHOICES = (
+        ('jueves', 'Jueves'),
+        ('viernes', 'Viernes'),
+    )
     nombre = models.CharField(max_length=145)
-    apellido_paterno = models.CharField(max_length=145)
-    apellido_materno = models.CharField(max_length=145)
-    escuela_procedencia = models.CharField(max_length=145)
-    foto = models.ImageField(
-        default='default-640x480.png', upload_to='registro', help_text="El tamaño de la imagen debe ser de 640 x 480 pixeles")
+    apellido_paterno = models.CharField(max_length=145, null=True, blank=True)
+    apellido_materno = models.CharField(max_length=145, null=True, blank=True)
+    email = models.EmailField(max_length=145)
+    tipo_participante = models.CharField(max_length=50, choices=PARTICIPANTE_CHOICES)
+    universidad_empresa = models.CharField(_('Universidad o Empresa'), max_length=145)
+    matricula = models.CharField(max_length=20, null=True, blank=True)
+    numero_empleado = models.CharField(max_length=20, null=True, blank=True)
+    # foto = models.ImageField(
+    #     default='default-640x480.png', upload_to='registro', help_text="El tamaño de la imagen debe ser de 640 x 480 pixeles")
     taller = models.ForeignKey(Curso, on_delete=models.CASCADE, null=True, blank=True)
+    dia_taller = models.CharField(_('Día taller'), max_length=20, choices=DIA_CHOICES, null=True, blank=True)
+    visita_industrial = models.ForeignKey(Empresa, on_delete=models.CASCADE, null=True, blank=True)
+    dia_visita = models.CharField(_('Día visita industrial'), max_length=20, choices=DIA_CHOICES, null=True, blank=True)
     inscrito = models.BooleanField(default=False)
-    referencia = models.CharField(max_length=140, unique=True)
-    comprobante_pago = models.FileField(default='default-640x480.png', upload_to='registro/comprobante')
+    referencia = models.CharField(max_length=140, null=True, blank=True)
+    comprobante_pago = models.FileField(upload_to='registro/comprobante', null=True, blank=True)
+    formato_inscripcion = models.FileField(upload_to='registro/inscripcion', null=True, blank=True)
+    fecha_creacion= models.DateTimeField(verbose_name='Fecha de creación', auto_now=True)
+    fecha_actualizacion=models.DateTimeField(verbose_name='Fecha de actualización', auto_now_add=True)
 
     class Meta:
         verbose_name = "Registro"
         verbose_name_plural = "Registros"
 
-    def __str__(self) :
-        return self.nombre
+    def __str__(self):
+        return f'{self.nombre}'
+    
+    def nombre_completo(self):
+        campos_nombre = [self.nombre]
+        if self.apellido_paterno:
+            campos_nombre.append(self.apellido_paterno)
+        if self.apellido_materno:
+            campos_nombre.append(self.apellido_materno)
+        return ' '.join(campos_nombre)
 

@@ -22,7 +22,7 @@
             padding: 30px;
         }
 
-        .card-header h1 {
+        .card-header h3 {
             text-align: center;
             font-weight: 800;
         }
@@ -32,7 +32,7 @@
         }
 
         .card-body p {
-            font-size: 18px;
+            font-size: 16px;
         }
 
         .card-footer {
@@ -53,11 +53,56 @@
             <h3>Congreso Internacional de Procesos Industriales</h3>
         </div>
         <div class="card-body">
-            <h3 style="margin-bottom: 15px;">Este mensaje fue enviado desde el formulario de registro del sitio web del Congreso Internacional de Procesos Industriales.</h3>
-            <p><span style="font-weight: 900;">Nombre: </span>{{ nombre }} {{ apellido_paterno }} {{ apellido_materno }}</p>
-            <p><span style="font-weight: 900;">Escuela de Procedencia: </span> {{ escuela_procedencia }}</p>
-            <p><span style="font-weight: 900;">Taller: </span> {{ taller }}</p>
-            <p><span style="font-weight: 900;">Referencia: </span> {{ referencia }}</p>
+            <h4 style="margin-bottom: 15px;">Este mensaje fue enviado desde el formulario de registro del sitio web del
+                Congreso Internacional de Procesos Industriales.</h3>
+                <p>
+                    <span style="font-weight: 900;">Nombre: </span>
+                    {{ nombre }} {{ apellido_paterno }} {{ apellido_materno }}
+                </p>
+                <p>
+                    <span style="font-weight: 900;">Email: </span>
+                    <a href="mailto:{{ email }}">{{ email }}</a>
+                </p>
+                <p>
+                    <span style="font-weight: 900;">Tipo de participante: </span>
+                    {{ tipo_participante }}
+                </p>
+                <p>
+                    <span style="font-weight: 900;">Universidad o Empresa: </span>
+                    {{ universidad_empresa }}
+                </p>
+                {% if matricula %}
+                <p>
+                    <span style="font-weight: 900;">Matrícula: </span>
+                    {{ matricula }}
+                </p>
+                {% endif %}
+                {% if numero_empleado %}
+                <p>
+                    <span style="font-weight: 900;">Número de empleado: </span>
+                    {{ numero_empleado }}
+                </p>
+                {% endif %}
+                <p>
+                    <span style="font-weight: 900;">Taller: </span>
+                    {{ taller }}
+                </p>
+                <p>
+                    <span style="font-weight: 900;">Día taller: </span>
+                    {{ dia_taller }}
+                </p>
+                <p>
+                    <span style="font-weight: 900;">Visita industrial: </span>
+                    {{ visita_industrial }}
+                </p>
+                <p>
+                    <span style="font-weight: 900;">Día visita industrial: </span>
+                    {{ dia_visita }}
+                </p>
+                <p>
+                    <span style="font-weight: 900;">Referencia: </span>
+                    {{ referencia }}
+                </p>
         </div>
         <div class="card-footer">
             <a href="https://coinpi.utsalamanca.edu.mx/" target="_blank">

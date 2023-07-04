@@ -53,18 +53,33 @@ class RegistroAPI(APIView):
             nombre = serializer.validated_data['nombre']
             apellido_paterno = serializer.validated_data['apellido_paterno']
             apellido_materno = serializer.validated_data['apellido_materno']
-            escuela_procedencia = serializer.validated_data['escuela_procedencia']
-            foto = serializer.validated_data['foto']
+            email = serializer.validated_data['email']
+            tipo_participante = serializer.validated_data['tipo_participante']
+            universidad_empresa = serializer.validated_data['universidad_empresa']
+            matricula = serializer.validated_data['matricula']
+            numero_empleado = serializer.validated_data['numero_empleado']
+            # foto = serializer.validated_data['foto']
             taller = serializer.validated_data['taller']
+            dia_taller = serializer.validated_data['dia_taller']
+            visita_industrial = serializer.validated_data['visita_industrial']
+            dia_visita = serializer.validated_data['dia_visita']
             referencia = serializer.validated_data['referencia']
             comprobante_pago = serializer.validated_data['comprobante_pago']
+            formato_inscripcion = serializer.validated_data['formato_inscripcion']
 
             context = {
                 'nombre': nombre,
                 'apellido_paterno': apellido_paterno,
                 'apellido_materno': apellido_materno,
-                'escuela_procedencia': escuela_procedencia,
+                'email': email,
+                'tipo_participante': tipo_participante,
+                'universidad_empresa': universidad_empresa,
+                'matricula': matricula,
+                'numero_empleado': numero_empleado,
                 'taller': taller,
+                'dia_taller': dia_taller,
+                'visita_industrial': visita_industrial,
+                'dia_visita': dia_visita,
                 'referencia': referencia
             }
             html_content = render_to_string('eventos/form_registro.html', context)
@@ -72,9 +87,10 @@ class RegistroAPI(APIView):
             # Construir el mensaje de correo
 
             try:
-                mail = EmailMessage('Formulario de Registro COINPI', html_content, settings.DEFAULT_FROM_EMAIL, ['elhongo1409@outlook.com'])
-                mail.attach(str(foto), foto.read(), foto.content_type)
+                mail = EmailMessage('Formulario de Registro COINPI', html_content, settings.DEFAULT_FROM_EMAIL, ['coinpi.registro2023@utsalamanca.edu.mx'])
+                # mail.attach(str(foto), foto.read(), foto.content_type)
                 mail.attach(str(comprobante_pago), comprobante_pago.read(), comprobante_pago.content_type)
+                mail.attach(str(formato_inscripcion), formato_inscripcion.read(), formato_inscripcion.content_type)
                 mail.content_subtype = 'html'
                 mail.send(fail_silently=False)
                 serializer.save()
