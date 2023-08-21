@@ -125,7 +125,7 @@ class Curso(models.Model):
         verbose_name = "Curso"
         verbose_name_plural = "Cursos"
 
-    def __str__(self) :
+    def __str__(self):
         return self.nombre
     
 class Contacto(models.Model):

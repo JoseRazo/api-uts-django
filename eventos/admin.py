@@ -26,7 +26,7 @@ class InstructorAdmin(admin.ModelAdmin):
 
 class CronogramaAdmin(admin.ModelAdmin):
     list_display=("id", "tipo_actividad", "curso", "dia","fecha","hora_inicio","hora_fin")
-    search_fields=("id", "tipo_actividad", "curso", "dia","fecha","hora_inicio","hora_fin")
+    search_fields=("id", "tipo_actividad", "curso__nombre", "dia","fecha","hora_inicio","hora_fin")
 
 class HotelAdmin(admin.ModelAdmin):
     list_display=("nombre","direccion","url")
@@ -49,8 +49,8 @@ class CursoResource(resources.ModelResource):
 
 class CursoAdmin(ExportMixin, admin.ModelAdmin):
     resource_class = CursoResource
-    list_display=("nombre","instructor","objetivo")
-    search_fields=("nombre","instructor","objetivo")
+    list_display=("nombre", "instructor", "objetivo")
+    search_fields=("nombre", "instructor__nombre")
 
 class EmpresaAdmin(admin.ModelAdmin):
     list_display=("nombre", 'activo', 'visita_industrial')
@@ -104,7 +104,8 @@ class RegistroAdmin(ImportExportModelAdmin):
     resource_class = RegistroResource
     list_display=("nombre_completo", 'email', 'tipo_participante', "universidad_empresa", "taller", "inscrito", "referencia", 'fecha_creacion')
     readonly_fields = ("fecha_creacion", "fecha_actualizacion")
-    search_fields=("nombre", 'referencia')
+    search_fields = ('nombre', 'apellido_paterno', 'apellido_materno', 'referencia', 'email')
+    list_filter = ('taller',)
 
     # def has_add_permission(self, request, obj=None):
     #     return False
