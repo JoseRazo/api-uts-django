@@ -10,8 +10,8 @@ class Instructor(models.Model):
     area_estudios=models.CharField(max_length=254, verbose_name='Area de estudios', null=True, blank=True)
     descripcion= RichTextField(verbose_name='Descripción', null=True, blank=True)
     curriculum=models.FileField(blank=True, null=True)
-    fecha_creacion= models.DateField(verbose_name='Fecha de creación', auto_now=True)
-    fecha_actualizacion=models.DateField(verbose_name='Fecha de actualización', auto_now_add=True)
+    fecha_creacion= models.DateField(verbose_name='Fecha de creación', auto_now_add=True)
+    fecha_actualizacion=models.DateField(verbose_name='Fecha de actualización', auto_now=True)
     fotografia= models.ImageField(upload_to="instructores", blank=True, null=True, default="perfil-default.png")
 
     class Meta:
@@ -170,8 +170,8 @@ class Registro(models.Model):
     referencia = models.CharField(max_length=140, null=True, blank=True)
     comprobante_pago = models.FileField(upload_to='registro/comprobante', null=True, blank=True)
     formato_inscripcion = models.FileField(upload_to='registro/inscripcion', null=True, blank=True)
-    fecha_creacion= models.DateTimeField(verbose_name='Fecha de creación', auto_now=True)
-    fecha_actualizacion=models.DateTimeField(verbose_name='Fecha de actualización', auto_now_add=True)
+    fecha_creacion= models.DateTimeField(verbose_name='Fecha de creación', auto_now_add=True)
+    fecha_actualizacion=models.DateTimeField(verbose_name='Fecha de actualización', auto_now=True)
 
     class Meta:
         verbose_name = "Registro"
