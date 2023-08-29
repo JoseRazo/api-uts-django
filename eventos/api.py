@@ -42,7 +42,7 @@ class EventoViewSet(generics.ListAPIView):
     serializer_class = EventoSerializer
 
 class CursoViewSet(generics.ListAPIView):
-    queryset = Curso.objects.all()
+    queryset = Curso.objects.filter(activo=True)
     permission_classes = [permissions.AllowAny]
     serializer_class = CursoSerializer
 

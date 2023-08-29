@@ -46,8 +46,8 @@ class CursoSerializer(serializers.ModelSerializer):
     instructor = InstructorCursoSerializer()
     class Meta:
         model = Curso
-        fields = ('id','instructor','nombre','objetivo')
-        read_only_fields = ('id','instructor','nombre','objetivo',)
+        fields = ('id','instructor','nombre','objetivo', 'activo')
+        read_only_fields = ('id','instructor','nombre','objetivo', 'activo')
 
 class EmpresaSerializer(serializers.ModelSerializer):
     class Meta:

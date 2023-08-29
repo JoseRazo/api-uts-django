@@ -117,9 +117,10 @@ class Evento(models.Model):
         return self.nombre
     
 class Curso(models.Model):
-    instructor=models.ForeignKey(Instructor, on_delete=models.CASCADE)
-    nombre=models.CharField(max_length=254)
-    objetivo=RichTextField()
+    instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=254)
+    objetivo = RichTextField()
+    activo = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = "Curso"
