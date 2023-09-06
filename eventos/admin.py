@@ -49,7 +49,7 @@ class CursoResource(resources.ModelResource):
 
 class CursoAdmin(ExportMixin, admin.ModelAdmin):
     resource_class = CursoResource
-    list_display=("nombre", "instructor", "objetivo")
+    list_display=("nombre", "instructor", "activo")
     search_fields=("nombre", "instructor__nombre")
 
 class EmpresaAdmin(admin.ModelAdmin):
