@@ -61,8 +61,8 @@ class RegistroAPI(APIView):
             # foto = serializer.validated_data['foto']
             taller = serializer.validated_data['taller']
             dia_taller = serializer.validated_data['dia_taller']
-            visita_industrial = serializer.validated_data['visita_industrial']
-            dia_visita = serializer.validated_data['dia_visita']
+            # visita_industrial = serializer.validated_data['visita_industrial']
+            # dia_visita = serializer.validated_data['dia_visita']
             referencia = serializer.validated_data['referencia']
             comprobante_pago = serializer.validated_data['comprobante_pago']
             formato_inscripcion = serializer.validated_data['formato_inscripcion']
@@ -78,8 +78,8 @@ class RegistroAPI(APIView):
                 'numero_empleado': numero_empleado,
                 'taller': taller,
                 'dia_taller': dia_taller,
-                'visita_industrial': visita_industrial,
-                'dia_visita': dia_visita,
+                # 'visita_industrial': visita_industrial,
+                # 'dia_visita': dia_visita,
                 'referencia': referencia
             }
             html_content = render_to_string('eventos/form_registro.html', context)

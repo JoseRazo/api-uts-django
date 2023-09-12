@@ -68,8 +68,8 @@ class RegistroResource(resources.ModelResource):
     numero_empleado = fields.Field(attribute='numero_empleado', column_name='Numero de Empleado')
     taller = fields.Field(attribute='taller', column_name='Taller', widget=ForeignKeyWidget(Curso, 'nombre'))
     dia_taller = fields.Field(attribute='dia_taller', column_name='Dia Ingreso al taller')
-    visita_industrial = fields.Field(attribute='visita_industrial', column_name='Visita Industrial', widget=ForeignKeyWidget(Empresa, 'nombre'))
-    dia_visita = fields.Field(attribute='dia_visita', column_name='Dia Visita Industrial')
+    # visita_industrial = fields.Field(attribute='visita_industrial', column_name='Visita Industrial', widget=ForeignKeyWidget(Empresa, 'nombre'))
+    # dia_visita = fields.Field(attribute='dia_visita', column_name='Dia Visita Industrial')
     inscrito = fields.Field(attribute='inscrito', column_name='Inscrito')
     referencia = fields.Field(attribute='referencia', column_name='Referencia')
 
@@ -85,12 +85,12 @@ class RegistroResource(resources.ModelResource):
             instance.taller = taller
         return instance
     
-    def before_save_instance(self, instance, using_transactions, dry_run):
-        visita_nombre = getattr(instance, 'visita_industrial')
-        if visita_nombre:
-            visita_industrial = Empresa.objects.get(nombre=visita_nombre)
-            instance.visita_industrial = visita_industrial
-        return instance
+    # def before_save_instance(self, instance, using_transactions, dry_run):
+    #     visita_nombre = getattr(instance, 'visita_industrial')
+    #     if visita_nombre:
+    #         visita_industrial = Empresa.objects.get(nombre=visita_nombre)
+    #         instance.visita_industrial = visita_industrial
+    #     return instance
     
     def before_import_row(self, row, **kwargs):
         tipo_participante_value = row.get('Tipo Participante')
@@ -98,7 +98,6 @@ class RegistroResource(resources.ModelResource):
             tipo_participante = next(item[0] for item in Registro.PARTICIPANTE_CHOICES if item[1] == tipo_participante_value)
             row['Tipo Participante'] = tipo_participante
         return super().before_import_row(row, **kwargs)
-
 
 class RegistroAdmin(ImportExportModelAdmin):
     resource_class = RegistroResource
