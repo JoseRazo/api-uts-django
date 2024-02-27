@@ -28,6 +28,7 @@ urlpatterns = [
     path('api/', include('noticias.urls')),
     path('api/', include('becas.urls')),
     path('api/', include('eventos.urls')),
+    path('api/', include('sgc.urls')),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

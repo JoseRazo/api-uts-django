@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'noticias',
     'eventos',
     'becas',
+    'sgc',
 ]
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
