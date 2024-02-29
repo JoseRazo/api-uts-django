@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'eventos',
     'becas',
     'sgc',
+    'bolsa_trabajo_uts',
 ]
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
