@@ -8,7 +8,7 @@ services:
         restart: always
         # env_file:
         #     - .env
-        command: python manage.py runserver --insecure 0.0.0.0:8001
+        command: python manage.py runserver 0.0.0.0:8001
         volumes:
             - .:/code
         ports:
