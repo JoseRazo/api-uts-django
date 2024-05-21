@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 import os
 
 class Departamento(models.Model):
@@ -30,6 +31,19 @@ class Documento(models.Model):
     fecha = models.DateField(blank=True, null=True)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now=True)
+    creado_por = models.ForeignKey(User, related_name='Creado_por', on_delete=models.SET_NULL, null=True, blank=True, editable=False)
+    actualizado_por = models.ForeignKey(User, related_name='Actualizado_por', on_delete=models.SET_NULL, null=True, blank=True, editable=False)
+
+    def save(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        if user:
+            if not self.pk:
+                # Documento nuevo, establece el usuario como creador
+                self.creado_por = user
+            else:
+                # Documento existente, establece el usuario como actualizador
+                self.actualizado_por = user
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.nombre
