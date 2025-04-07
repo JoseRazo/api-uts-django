@@ -29,6 +29,7 @@ urlpatterns = [
     path('api/', include('eventos.urls')),
     path('api/', include('sgc.urls')),
     path('api/', include('bolsa_trabajo_uts.urls')),
+    path('api/', include('widgets.urls')),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
 if not settings.DEBUG:

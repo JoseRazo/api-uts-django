@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'becas',
     'sgc',
     'bolsa_trabajo_uts',
+    'widgets',
 ]
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
